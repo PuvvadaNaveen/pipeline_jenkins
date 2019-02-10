@@ -3,6 +3,6 @@ stage('SCM Checkout'){
 git 'https://github.com/PuvvadaNaveen/pipeline_jenkins'
 }
 stage('Compile-Package'){
-sh 'mvn complie'
+sh 'mvn compile'
 }
 }
