@@ -1,6 +1,6 @@
 node{
   stage('push'){
-    properties([pipelineTriggers([githubPush()])])
+    properties([[$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/PuvvadaNaveen/pipeline_jenkins/'], pipelineTriggers([githubPush()])])
   }
 stage('SCM Checkout'){
 git 'https://github.com/PuvvadaNaveen/pipeline_jenkins'
