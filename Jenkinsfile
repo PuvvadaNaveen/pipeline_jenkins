@@ -1,11 +1,10 @@
-node{
-  stage('push'){
-    properties([[$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/PuvvadaNaveen/pipeline_jenkins/'], pipelineTriggers([githubPush()])])
-  }
-stage('SCM Checkout'){
-git 'https://github.com/PuvvadaNaveen/pipeline_jenkins'
-}
-stage('Compile-Package'){
-sh 'mvn compile'
-}
+#!/usr/bin/env groovy
+
+node {
+    stage('Build and Test') {
+        properties([pipelineTriggers([[$class: 'GitHubPushTrigger'], pollSCM('H/15 * * * *')])])
+        checkout scm
+        env.PATH = "${tool 'Maven 3'}/bin:${env.PATH}"
+        sh 'mvn clean package'
+    }
 }
